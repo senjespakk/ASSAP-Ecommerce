@@ -4,9 +4,10 @@ from django.db.models import Count
 
 class ThreadManager(models.Manager):
     def get_or_create_personal_thread(self, user1, user2):
+        pass
         threads = self.get_queryset().filter(thread_type='personal')
         threads = threads.filter(users__in=[user1, user2]).distinct()
-        threads = threads.annotate(u_count=Count('users')).filter(u_count=2)
+        hreads = threads.annotate(u_count=Count('users')).filter(u_count=2)
         if threads.exists():
             return threads.first()
         else:

@@ -1,5 +1,6 @@
 from chat.managers import ThreadManager
 from django.db import models
+from django.contrib.auth.models import User
 
 class TrackingModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -14,9 +15,9 @@ class Thread(TrackingModel):
         ('group', 'Group')
     )
 
-    name = models.CharField(max_length=50, null=True, blank=True)
+    name = models.CharField(max_length=50,  blank=True)
     thread_type = models.CharField(max_length=15, choices=THREAD_TYPE, default='group')
-    users = models.ManyToManyField('auth.User')
+    users = models.ManyToManyField(User)
 
     objects = ThreadManager()
 
@@ -27,7 +28,7 @@ class Thread(TrackingModel):
 
 class Message(TrackingModel):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
-    sender = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(blank=False, null=False)
 
     def __str__(self) -> str:

@@ -1,5 +1,8 @@
+    {% load static %}
+
 <html>
     <head>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
         <title>Chat Application</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% include 'chat/stylesheets.html' %}
@@ -10,7 +13,7 @@
 
         {% include 'chat/javascripts.html' %}
 
-        {% block custom_javascript %}
-        {% endblock custom_javascript %}
+        {% block custom_js %}
+        {% endblock custom_js %}
     </body>
 </html>
